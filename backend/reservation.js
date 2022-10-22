@@ -1,14 +1,12 @@
-import { connection } from "./connection";
+import { connection, initConnection } from "./connection";
 
 
-export function getAllReservations() {
+export async function getAllReservations() {
+    if (connection == null) await initConnection();
 
-
-    connection.query(
-        'SELECT * FROM `slots`',
-        function (err, results, fields) {
-            console.log(results); // results contains rows returned by server
-            console.log(fields); // fields contains extra meta data about results, if available
-        }
+    const [rows, fields] = await connection.execute(
+        'SELECT * FROM `slots`'
     );
+    // console.log(rows);
+    return JSON.parse(JSON.stringify(rows));
 }
