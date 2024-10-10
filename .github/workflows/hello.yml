@@ -1,0 +1,12 @@
+name: sample workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  job1:
+    runs-on: [ubuntu]
+    steps:
+      - name: print hello
+        run: echo "hello"
+      
